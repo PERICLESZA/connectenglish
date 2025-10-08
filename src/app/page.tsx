@@ -2,11 +2,15 @@
 
 import { useState } from 'react';
 
+interface ViewProps {
+  setView: React.Dispatch<React.SetStateAction<string>>;
+}
+
 // --- COMPONENTES DE VISUALIZAÇÃO ---
 
 // Componente: Página de Abertura (Home)
-const HomeView = ({ setView }) => (
-    <div>
+const HomeView: React.FC<ViewProps> = ({ setView }) => (
+    <div>:
         <div className="text-center py-12 md:py-20">
             <h1 className="text-4xl md:text-6xl font-extrabold text-deep-purple leading-tight">
                 Sua jornada para a fluência<br/>começa com a <span className="text-vibrant-orange">conexão certa.</span>
@@ -49,7 +53,7 @@ const HomeView = ({ setView }) => (
 );
 
 // Componente: Página de Login
-const LoginView = ({ setView }) => (
+const LoginView: React.FC<ViewProps> = ({ setView }) => (
     <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg text-center mt-10">
         <h1 className="text-3xl font-bold text-deep-purple mb-2">Acesse sua conta</h1>
         <p className="text-gray-600 mb-8">Bem-vindo(a) de volta!</p>
@@ -88,14 +92,18 @@ const StudentView = () => {
     const [step, setStep] = useState(1);
     const totalSteps = 3;
 
-    const navigateStep = (direction) => {
+    const navigateStep = (direction: number) => {
         const newStep = step + direction;
         if (newStep > 0 && newStep <= totalSteps) {
             setStep(newStep);
         }
     };
     
-    const StepIndicator = ({ stepNumber }) => (
+    interface StepIndicatorProps {
+        stepNumber: number;
+    }
+
+    const StepIndicator: React.FC<StepIndicatorProps> = ({ stepNumber }) => (
         <div className={`step-indicator w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center ${step === stepNumber ? 'active' : ''} ${step > stepNumber ? 'completed' : 'bg-gray-200 text-gray-500'}`}>
             {stepNumber}
         </div>
@@ -122,7 +130,7 @@ const StudentView = () => {
                         <div className="space-y-4">
                             <input type="text" placeholder="Nome e Sobrenome" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus-ring-orange transition" />
                             <input type="tel" placeholder="Número de WhatsApp" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus-ring-orange transition" />
-                            <textarea placeholder="Descreva qual o professor ideal para você (Ex: Eu quero um professor que...)" rows="4" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus-ring-orange transition"></textarea>
+                            <textarea placeholder="Descreva qual o professor ideal para você (Ex: Eu quero um professor que...)" rows={4} className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus-ring-orange transition"></textarea>
                         </div>
                     </div>
                 )}
@@ -169,14 +177,18 @@ const TeacherView = () => {
     const [step, setStep] = useState(1);
     const totalSteps = 4;
 
-    const navigateStep = (direction) => {
+    const navigateStep = (direction: number) => {
         const newStep = step + direction;
         if (newStep > 0 && newStep <= totalSteps) {
             setStep(newStep);
         }
     };
     
-    const StepIndicator = ({ stepNumber }) => (
+    interface StepIndicatorProps {
+        stepNumber: number;
+    }
+
+    const StepIndicator: React.FC<StepIndicatorProps> = ({ stepNumber }) => (
         <div className={`step-indicator w-8 h-8 rounded-full flex items-center justify-center ${step === stepNumber ? 'active' : ''} ${step > stepNumber ? 'completed' : 'bg-gray-200 text-gray-500'}`}>
             {stepNumber}
         </div>
@@ -203,7 +215,7 @@ const TeacherView = () => {
                         <div className="space-y-4">
                             <input type="text" placeholder="Nome e Sobrenome" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg"/>
                             <input type="tel" placeholder="Número de WhatsApp" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg"/>
-                            <textarea placeholder="Descreva os alunos ideais para você (Ex: Eu quero alunos que...)" rows="4" className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
+                            <textarea placeholder="Descreva os alunos ideais para você (Ex: Eu quero alunos que...)" rows={4} className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
                         </div>
                     </div>
                 )}
@@ -236,7 +248,7 @@ const TeacherView = () => {
                                 <input type="file" multiple className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-purple-100 file:text-deep-purple hover:file:bg-purple-200 transition"/>
                              </div>
                          </div>
-                          <textarea placeholder="Fale sobre suas experiências no exterior, 5 filmes favoritos, gostos musicais, etc." rows="4" className="mt-4 block w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
+                          <textarea placeholder="Fale sobre suas experiências no exterior, 5 filmes favoritos, gostos musicais, etc." rows={4} className="mt-4 block w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
                     </div>
                 )}
                 {step === 4 && (
